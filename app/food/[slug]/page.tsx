@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import { getFoodBySlug, categories, foods } from "@/lib/data";
 import NutritionTable from "@/components/NutritionTable";
 import ProsCons from "@/components/ProsCons";
+import { getImagePath } from "@/lib/utils";
 
 interface FoodPageProps {
     params: Promise<{
@@ -117,12 +117,10 @@ export default async function FoodPage({ params }: FoodPageProps) {
                                 🌿
                             </div>
                             {food.image && (
-                                <Image
-                                    src={food.image}
+                                <img
+                                    src={getImagePath(food.image)}
                                     alt={`${food.name} presentation`}
-                                    fill
-                                    className="object-cover relative z-10"
-                                    priority
+                                    className="absolute inset-0 object-cover w-full h-full z-10"
                                 />
                             )}
                         </div>

@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { getImagePath } from "@/lib/utils";
 import { FoodItem } from "@/lib/data";
 
 interface FoodCardProps {
@@ -9,18 +9,15 @@ interface FoodCardProps {
 export default function FoodCard({ food }: FoodCardProps) {
     return (
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-            <div className="relative h-48 w-full bg-gray-100">
-                {/* Using unoptimized for placeholder external images or if local images aren't present yet */}
+            <div className="relative h-48 w-full bg-gray-100 overflow-hidden">
                 <div className="absolute inset-0 flex items-center justify-center text-4xl bg-gradient-to-br from-green-50 to-green-100">
                     🌿
                 </div>
                 {food.image && (
-                    <Image
-                        src={food.image}
+                    <img
+                        src={getImagePath(food.image)}
                         alt={food.name}
-                        fill
-                        className="object-cover relative z-10"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="absolute inset-0 object-cover w-full h-full z-10"
                     />
                 )}
             </div>

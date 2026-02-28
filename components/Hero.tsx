@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from "react";
+import { getImagePath } from "@/lib/utils";
 
 export default function Hero() {
     const banners = [
@@ -17,7 +16,7 @@ export default function Hero() {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImageIndex((prevIndex) => (prevIndex + 1) % banners.length);
-        }, 5000); // Change image every 5 seconds
+        }, 5000);
 
         return () => clearInterval(interval);
     }, [banners.length]);
@@ -26,17 +25,17 @@ export default function Hero() {
         <div className="relative bg-gray-900 overflow-hidden rounded-2xl mx-4 sm:mx-6 lg:mx-8 mt-6">
             <div className="absolute inset-0">
                 {banners.map((banner, index) => (
-                    <Image
+                    <img
                         key={banner}
-                        src={banner}
+                        src={getImagePath(banner)}
                         alt={`Healthy Foods Banner ${index + 1}`}
-                        fill
-                        className={`object-cover transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"}`}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"
+                            }`}
                     />
                 ))}
             </div>
             <div className="relative w-full h-80 sm:h-96 md:h-[30rem] lg:h-[36rem] z-10">
-                {/* Empty container just to provide height for the slider */}
+                {/* Provides height for the slider */}
             </div>
 
             {/* Slider Indicators */}
@@ -44,7 +43,7 @@ export default function Hero() {
                 {banners.map((_, index) => (
                     <button
                         key={index}
-                        className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentImageIndex ? "bg-primary-500 scale-125 shadow-md" : "bg-white/50 hover:bg-white/80"
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentImageIndex ? "bg-white scale-125 shadow-md" : "bg-white/50 hover:bg-white/80"
                             }`}
                         onClick={() => setCurrentImageIndex(index)}
                         aria-label={`Go to slide ${index + 1}`}
