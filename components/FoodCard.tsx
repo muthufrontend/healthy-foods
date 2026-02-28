@@ -15,10 +15,12 @@ export default function FoodCard({ food }: FoodCardProps) {
                     🌿
                 </div>
                 {food.image && (
-                    <img
+                    <Image
                         src={food.image}
                         alt={food.name}
-                        className="object-cover w-full h-full relative z-10"
+                        fill
+                        className="object-cover relative z-10"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                 )}
             </div>

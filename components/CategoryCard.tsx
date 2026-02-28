@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 interface CategoryCardProps {
     name: string;
@@ -13,10 +14,11 @@ export default function CategoryCard({ name, slug, icon, image }: CategoryCardPr
             <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 hover:border-primary-200 h-full flex flex-col">
                 {image ? (
                     <div className="w-full h-48 relative overflow-hidden bg-gray-50 flex-shrink-0">
-                        <img
+                        <Image
                             src={image}
                             alt={name}
-                            className="object-cover w-full h-full transform transition-transform duration-700 ease-in-out group-hover:scale-110"
+                            fill
+                            className="object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-gray-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>

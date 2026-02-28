@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function Hero() {
@@ -25,12 +26,12 @@ export default function Hero() {
         <div className="relative bg-gray-900 overflow-hidden rounded-2xl mx-4 sm:mx-6 lg:mx-8 mt-6">
             <div className="absolute inset-0">
                 {banners.map((banner, index) => (
-                    <img
+                    <Image
                         key={banner}
                         src={banner}
                         alt={`Healthy Foods Banner ${index + 1}`}
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"
-                            }`}
+                        fill
+                        className={`object-cover transition-opacity duration-1000 ease-in-out ${index === currentImageIndex ? "opacity-100" : "opacity-0"}`}
                     />
                 ))}
             </div>

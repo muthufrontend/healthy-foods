@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { getFoodBySlug, categories, foods } from "@/lib/data";
 import NutritionTable from "@/components/NutritionTable";
@@ -116,10 +117,12 @@ export default async function FoodPage({ params }: FoodPageProps) {
                                 🌿
                             </div>
                             {food.image && (
-                                <img
+                                <Image
                                     src={food.image}
                                     alt={`${food.name} presentation`}
-                                    className="object-cover w-full h-full relative z-10"
+                                    fill
+                                    className="object-cover relative z-10"
+                                    priority
                                 />
                             )}
                         </div>
