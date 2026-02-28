@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-600: #16a34a; /* green-600 */
+  --color-accent-500: #f59e0b; /* amber-500 */
+  --color-text-800: #1f2937; /* gray-800 */
+  --color-bg-50: #f9fafb; /* gray-50 */
+}
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-800 font-sans antialiased;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
