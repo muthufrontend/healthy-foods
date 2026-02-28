@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
-import { getFoodBySlug, categories } from "@/lib/data";
+import { getFoodBySlug, categories, foods } from "@/lib/data";
 import NutritionTable from "@/components/NutritionTable";
 import ProsCons from "@/components/ProsCons";
 
@@ -9,6 +8,12 @@ interface FoodPageProps {
     params: Promise<{
         slug: string;
     }>;
+}
+
+export function generateStaticParams() {
+    return foods.map((food) => ({
+        slug: food.slug,
+    }));
 }
 
 export async function generateMetadata({ params }: FoodPageProps) {
