@@ -1,20 +1,45 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-600: #16a34a; /* green-600 */
-  --color-accent-500: #f59e0b; /* amber-500 */
-  --color-text-800: #1f2937; /* gray-800 */
-  --color-bg-50: #f9fafb; /* gray-50 */
+  --color-primary-50: #f0fdf4;
+  --color-primary-100: #dcfce7;
+  --color-primary-500: #22c55e;
+  --color-primary-600: #16a34a;
+  
+  --color-accent-500: #f59e0b;
+  
+  --color-text-800: #1f2937;
+  --color-text-900: #111827;
+  
+  --color-beige-50: #fdfbf7;
+  --color-beige-100: #f5f2eb;
+
+  --color-glass-white: rgba(255, 255, 255, 0.85);
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float 6s ease-in-out 3s infinite;
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
 }
 
 @layer base {
   body {
-    @apply bg-gray-50 text-gray-800 font-sans antialiased;
+    @apply bg-beige-50 text-text-800 font-sans antialiased selection:bg-primary-500/30;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .glass-card {
+    @apply bg-glass-white backdrop-blur-xl border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.04)] sm:rounded-[24px] rounded-2xl;
   }
 }

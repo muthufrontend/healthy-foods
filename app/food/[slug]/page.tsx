@@ -1,9 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getFoodBySlug, categories, foods } from "@/lib/data";
-import NutritionTable from "@/components/NutritionTable";
-import ProsCons from "@/components/ProsCons";
-import { getImagePath } from "@/lib/utils";
+import FoodClientView from "@/components/FoodClientView";
 
 interface FoodPageProps {
     params: Promise<{
@@ -71,7 +69,7 @@ export default async function FoodPage({ params }: FoodPageProps) {
     };
 
     return (
-        <>
+        <div className="bg-beige-50 min-h-screen">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -82,7 +80,7 @@ export default async function FoodPage({ params }: FoodPageProps) {
                 <nav className="flex text-sm text-gray-500 mb-8" aria-label="Breadcrumb">
                     <ol className="inline-flex items-center space-x-1 md:space-x-3">
                         <li className="inline-flex items-center">
-                            <Link href="/" className="hover:text-primary-600 transition-colors">
+                            <Link href="/" className="hover:text-primary-600 transition-colors font-medium">
                                 Home
                             </Link>
                         </li>
@@ -91,7 +89,7 @@ export default async function FoodPage({ params }: FoodPageProps) {
                                 <svg className="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
-                                <Link href={`/category/${food.category}`} className="hover:text-primary-600 transition-colors ml-1 md:ml-2">
+                                <Link href={`/category/${food.category}`} className="hover:text-primary-600 transition-colors ml-1 md:ml-2 font-medium">
                                     {categoryName}
                                 </Link>
                             </div>
@@ -101,61 +99,14 @@ export default async function FoodPage({ params }: FoodPageProps) {
                                 <svg className="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                 </svg>
-                                <span className="text-gray-900 font-medium ml-1 md:ml-2">{food.name}</span>
+                                <span className="text-gray-900 font-bold ml-1 md:ml-2">{food.name}</span>
                             </div>
                         </li>
                     </ol>
                 </nav>
 
-                <article className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-                    {/* Two-column layout on desktop */}
-                    <div className="flex flex-col md:flex-row gap-0 md:gap-10">
-
-                        {/* Left Column: Image */}
-                        <div className="w-full md:w-2/5 relative h-64 md:h-auto min-h-[400px] bg-green-50 flex-shrink-0">
-                            <div className="absolute inset-0 flex items-center justify-center text-8xl opacity-10">
-                                🌿
-                            </div>
-                            {food.image && (
-                                <img
-                                    src={getImagePath(food.image)}
-                                    alt={`${food.name} presentation`}
-                                    className="absolute inset-0 object-cover w-full h-full z-10"
-                                />
-                            )}
-                        </div>
-
-                        {/* Right Column: Content */}
-                        <div className="w-full md:w-3/5 p-8 md:p-12 md:pl-0 flex flex-col justify-center">
-                            <div className="mb-2 inline-flex items-center">
-                                <span className="px-3 py-1 rounded-full text-sm font-semibold tracking-wide text-primary-700 bg-primary-50 uppercase">
-                                    {categoryName}
-                                </span>
-                            </div>
-
-                            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-6">
-                                {food.name}
-                            </h1>
-
-                            <p className="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl text-balance">
-                                {food.description}
-                            </p>
-
-                            {/* Nutrition Table */}
-                            <NutritionTable nutrition={food.nutrition} />
-                        </div>
-                    </div>
-
-                    <div className="px-8 pb-12 md:px-12 md:pb-16 pt-0">
-                        <hr className="border-gray-100 my-8" />
-                        <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center text-balance">
-                            What you need to know about {food.name}
-                        </h2>
-                        {/* Pros & Cons */}
-                        <ProsCons pros={food.pros} cons={food.cons} />
-                    </div>
-                </article>
+                <FoodClientView food={food} categoryName={categoryName} />
             </div>
-        </>
+        </div>
     );
 }

@@ -1,3 +1,6 @@
+import { clsx, type ClassValue } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
 /**
  * Prepends the Next.js basePath to a given image path.
  * This is necessary because plain <img> tags don't automatically
@@ -10,4 +13,11 @@ export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
 
 export function getImagePath(src: string): string {
     return `${BASE_PATH}${src}`;
+}
+
+/**
+ * Safely merge tailwind classes
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
 }
